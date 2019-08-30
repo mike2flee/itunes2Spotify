@@ -7,7 +7,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       htmlBody: "Enter Dev mode to view loaded cherrio object",
-      link: "https://music.apple.com/us/playlist/nonametwo/pl.u-PDb446ZsGMKXBo"
+      link: "https://music.apple.com/us/playlist/nonametwo/pl.u-PDb446ZsGMKXBo",
+      clientId: "08f46a77cd954c4d85850f76690146d3",
+      clientSecret: "ab192b2513fc4557b82f7e681bc1fda0",
+      scope1: "user-read-email",
+      scope2: "user-follow-read",
+      token: ""
     };
     this.iTunesDom = this.iTunesDom.bind(this);
   }
@@ -36,3 +41,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+// https://accounts.spotify.com/en/authorize?client_id=08f46a77cd954c4d85850f76690146d3&response_type=token&scope=playlist-read-private%20playlist-modify%20playlist-modify-private&redirect_uri=http://localhost:3000/
