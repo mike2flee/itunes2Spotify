@@ -1,22 +1,23 @@
 import React from "react";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
-import App from "./App";
-import { Router, hasHistory } from "react-router";
+import { Router, Route, browserHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
+import nextPage from "./nextPage";
+import App from "./App";
 import configureStore from "./configureStore";
-import routes from "./routes";
 import * as serviceWorker from "./serviceWorker";
 
 const store = configureStore();
-const history = syncHistoryWithStore(hasHistory, store);
+
+const history = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
   <Provider store={store}>
-    <div>
-      <div>
-        <Router history={history} routes={routes} />
-      </div>
-    </div>
+    <Router history={history}>
+      <Route path="/" component={App}></Route>
+      <Route path="/next" component={nextPage}></Route>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

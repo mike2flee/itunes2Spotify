@@ -1,4 +1,5 @@
 import React from "react";
+import { browserHistory } from "react-router";
 const request = require("request");
 const cheerio = require("cheerio");
 
@@ -15,6 +16,7 @@ class App extends React.Component {
       token: ""
     };
     this.iTunesDom = this.iTunesDom.bind(this);
+    this.otherPage = this.otherPage.bind(this);
   }
 
   iTunesDom() {
@@ -29,11 +31,16 @@ class App extends React.Component {
     });
   }
 
+  otherPage() {
+    browserHistory.push("/next");
+  }
+
   render() {
     return (
       <div>
         <h1>iTunes -> Spotify</h1>
         <button onClick={this.iTunesDom}>CLICK</button>
+        <button onClick={this.otherPage}>NEXT</button>
         <div>{this.state.htmlBody}</div>
       </div>
     );
