@@ -43,6 +43,10 @@ class nextPage extends React.Component {
     const hash = window.location.hash;
     const hashArray = hash.split("=");
     const hashArray2 = hashArray[1].split("&");
+    console.log("hash");
+    console.log(hash);
+    console.log("hash array");
+    console.log(hashArray);
     console.log(hashArray2[2]);
   }
 
