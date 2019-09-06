@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { counterActionFunctions } from "./actions/counterActions";
 
+const request = require("request");
+const cheerio = require("cheerio");
+
 class nextPage extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +24,18 @@ class nextPage extends React.Component {
   addToCount() {
     console.log("We are at the start of the add function");
     this.props.actions.add();
+  }
+
+  iTunesDom() {
+    request(this.state.link, function(error, response, html) {
+      if (!error && response.statusCode === 200) {
+        const $ = cheerio.load(html);
+        console.log($("*"));
+      }
+    });
+    this.setState({
+      htmlBody: "link was loaded into cheerio"
+    });
   }
 
   render() {

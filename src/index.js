@@ -7,6 +7,7 @@ import nextPage from "./nextPage";
 import App from "./App";
 import configureStore from "./configureStore";
 import * as serviceWorker from "./serviceWorker";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = configureStore();
 
@@ -16,7 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}></Route>
-      <Route path="/next" component={nextPage}></Route>
+      <Route path="/playListCreation" component={nextPage}></Route>
     </Router>
   </Provider>,
   document.getElementById("root")
