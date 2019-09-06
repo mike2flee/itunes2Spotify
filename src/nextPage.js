@@ -15,6 +15,7 @@ class nextPage extends React.Component {
     };
     this.goToHome = this.goToHome.bind(this);
     this.addToCount = this.addToCount.bind(this);
+    this.urlGrab = this.urlGrab.bind(this);
   }
 
   goToHome() {
@@ -38,6 +39,13 @@ class nextPage extends React.Component {
     });
   }
 
+  urlGrab() {
+    const hash = window.location.hash;
+    const hashArray = hash.split("=");
+    const hashArray2 = hashArray[1].split("&");
+    console.log(hashArray2[2]);
+  }
+
   render() {
     return (
       <div>
@@ -46,6 +54,7 @@ class nextPage extends React.Component {
         <button onClick={this.goToHome}>Back</button>
         <button onClick={this.addToCount}>ADD</button>
         <button>SUB</button>
+        <button onClick={this.urlGrab}> url </button>
       </div>
     );
   }
