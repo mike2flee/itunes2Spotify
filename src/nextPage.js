@@ -47,7 +47,7 @@ class nextPage extends React.Component {
     console.log(hash);
     console.log("hash array");
     console.log(hashArray);
-    console.log(hashArray2[2]);
+    console.log(hashArray2[0]);
   }
 
   render() {
