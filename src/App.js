@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "reactstrap";
+import { browserHistory } from "react-router";
 import uriConstants from "./common/constants";
 
 class App extends React.Component {
@@ -9,6 +10,7 @@ class App extends React.Component {
       htmlBody: "Enter Dev mode to view loaded cherrio object"
     };
     this.spotifyLogin = this.spotifyLogin.bind(this);
+    this.goToHome = this.goToHome.bind(this);
   }
 
   spotifyLogin() {
@@ -21,6 +23,10 @@ class App extends React.Component {
     window.location.replace(theLink);
   }
 
+  goToHome() {
+    browserHistory.push("/playListCreation");
+  }
+
   render() {
     return (
       <div>
@@ -28,6 +34,7 @@ class App extends React.Component {
         <Button color="primary" size="lg" onClick={this.spotifyLogin}>
           Spotify Login
         </Button>
+        <Button onClick={this.goToHome}>next</Button>
       </div>
     );
   }
