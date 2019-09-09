@@ -3,6 +3,7 @@ import { browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { counterActionFunctions } from "./actions/counterActions";
+import { spotifyUserActionsFunctions } from "./actions/spotifyUserActions";
 
 const request = require("request");
 const cheerio = require("cheerio");
@@ -16,6 +17,7 @@ class nextPage extends React.Component {
     this.goToHome = this.goToHome.bind(this);
     this.addToCount = this.addToCount.bind(this);
     this.urlGrab = this.urlGrab.bind(this);
+    this.subtractCount = this.subtractCount.bind(this);
   }
 
   goToHome() {
@@ -25,6 +27,11 @@ class nextPage extends React.Component {
   addToCount() {
     console.log("We are at the start of the add function");
     this.props.actions.add();
+  }
+
+  subtractCount() {
+    console.log("we are subtracting");
+    this.props.actions.sub();
   }
 
   iTunesDom() {
@@ -43,11 +50,8 @@ class nextPage extends React.Component {
     const hash = window.location.hash;
     const hashArray = hash.split("=");
     const hashArray2 = hashArray[1].split("&");
-    console.log("hash");
-    console.log(hash);
-    console.log("hash array");
-    console.log(hashArray);
-    console.log(hashArray2[0]);
+    const jwt = hashArray2[0];
+    this.props.actions.getUserData(jwt);
   }
 
   render() {
@@ -57,7 +61,7 @@ class nextPage extends React.Component {
         <h1>{this.props.count}</h1>
         <button onClick={this.goToHome}>Back</button>
         <button onClick={this.addToCount}>ADD</button>
-        <button>SUB</button>
+        <button onClick={this.subtractCount}>SUB</button>
         <button onClick={this.urlGrab}> url </button>
       </div>
     );
@@ -66,7 +70,10 @@ class nextPage extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...counterActionFunctions }, dispatch)
+    actions: bindActionCreators(
+      { ...counterActionFunctions, ...spotifyUserActionsFunctions },
+      dispatch
+    )
   };
 }
 

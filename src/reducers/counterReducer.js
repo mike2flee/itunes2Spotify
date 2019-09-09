@@ -10,6 +10,10 @@ export default function counterReducer(state = initialState, actions) {
       return Object.assign({}, state, {
         count: state.count + 1
       });
+    case counterActions.SUB:
+      return Object.assign({}, state, {
+        count: state.count - 1
+      });
     default:
       return state;
   }
