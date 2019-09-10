@@ -3,7 +3,7 @@ import { browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { counterActionFunctions } from "./actions/counterActions";
-import { spotifyUserActionsFunctions } from "./actions/spotifyUserActions";
+import { getUserData, jwtActionFunction } from "./actions/spotifyUserActions";
 
 const request = require("request");
 const cheerio = require("cheerio");
@@ -51,13 +51,14 @@ class nextPage extends React.Component {
     const hashArray = hash.split("=");
     const hashArray2 = hashArray[1].split("&");
     const jwt = hashArray2[0];
+    this.props.actions.getJWT(jwt);
     this.props.actions.getUserData(jwt);
   }
 
   render() {
     return (
       <div>
-        <h1>this is the second page</h1>
+        <h1>Hello</h1>
         <h1>{this.props.count}</h1>
         <button onClick={this.goToHome}>Back</button>
         <button onClick={this.addToCount}>ADD</button>
@@ -71,7 +72,7 @@ class nextPage extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
-      { ...counterActionFunctions, ...spotifyUserActionsFunctions },
+      { ...counterActionFunctions, getUserData, ...jwtActionFunction },
       dispatch
     )
   };

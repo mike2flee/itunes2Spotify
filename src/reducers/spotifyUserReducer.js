@@ -1,4 +1,4 @@
-import { GET_USER_DATA } from "../actions/spotifyUserActions";
+import { GET_USER_DATA, SET_JWT } from "../actions/spotifyUserActions";
 
 const initialState = {
   userName: "",
@@ -10,6 +10,10 @@ const initialState = {
 
 export default function spotifyUserReducer(state = initialState, actions) {
   switch (actions.type) {
+    case SET_JWT:
+      return Object.assign({}, state, {
+        jwt: actions.jwt
+      });
     case `${GET_USER_DATA}_PENDING`:
       return Object.assign({}, state, {
         status: "PENDING",
@@ -17,7 +21,7 @@ export default function spotifyUserReducer(state = initialState, actions) {
       });
     case `${GET_USER_DATA}_FULFILLED`:
       return Object.assign({}, state, {
-        state: "FULFILLED",
+        status: "FULFILLED",
         isRequestComplete: true,
         userName: actions.payload.data.display_name,
         userID: actions.payload.data.id
