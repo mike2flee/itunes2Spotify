@@ -11,6 +11,7 @@ class App extends React.Component {
     };
     this.spotifyLogin = this.spotifyLogin.bind(this);
     this.goToHome = this.goToHome.bind(this);
+    this.goToCheers = this.goToCheers.bind(this);
   }
 
   spotifyLogin() {
@@ -26,6 +27,9 @@ class App extends React.Component {
   goToHome() {
     browserHistory.push("/playListCreation");
   }
+  goToCheers() {
+    browserHistory.push("/Cheers");
+  }
 
   render() {
     return (
@@ -34,7 +38,8 @@ class App extends React.Component {
         <Button color="primary" size="lg" onClick={this.spotifyLogin}>
           Spotify Login
         </Button>
-        <Button onClick={this.goToHome}>next</Button>
+        <Button color="warning" size="lg" onClick={this.goToHome}>next</Button>
+        <Button color="danger" size="lg" onClick={this.goToCheers}>Cheerio</Button>
       </div>
     );
   }

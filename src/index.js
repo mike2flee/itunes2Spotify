@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { Router, Route, browserHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import nextPage from "./nextPage";
+import webScraper from "./webScraper";
 import App from "./App";
 import configureStore from "./configureStore";
 import * as serviceWorker from "./serviceWorker";
@@ -18,6 +19,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}></Route>
       <Route path="/playListCreation" component={nextPage}></Route>
+      <Route path="/Cheers" component={webScraper}></Route>
     </Router>
   </Provider>,
   document.getElementById("root")
