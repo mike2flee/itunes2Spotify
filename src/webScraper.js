@@ -59,7 +59,7 @@ class webScraper extends React.Component {
                 songLibraryFin.push(songLibraryInit[i]);
               }
             }
-            console.log(songLibraryFin);
+            // console.log(songLibraryFin);
             var firstSong = new song('testSongName', 'testArtist');
             firstSong.songName = songLibraryFin[0];
             firstSong.artist = songLibraryFin[1];
@@ -67,7 +67,7 @@ class webScraper extends React.Component {
             for(i=2;i<(songLibraryFin.length);i++){
               if((i%2===0)){
                 var music = new song(songLibraryFin[i], songLibraryFin[i+1]);
-                console.log("i is equal to : " + i);
+                // console.log("i is equal to : " + i);
                 songLibrary.push(music);
               }
             }
