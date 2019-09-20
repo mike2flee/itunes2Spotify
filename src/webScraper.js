@@ -11,7 +11,7 @@ var song = function(songName, artist){
 var songLibrary = [];
 var songLibraryInit= [];
 var songLibraryFin= [];
-console.log(songLibrary);
+// console.log(songLibrary);
 class webScraper extends React.Component {
     constructor(props){
         super(props);
@@ -34,11 +34,11 @@ class webScraper extends React.Component {
             const userName = $('.product-header__identity');
             const tracks = $('.tracklist-item__text');
             var songString = tracks.text();
-            console.log("the character at x is: " + songString.charAt(9));
+            // console.log("the character at x is: " + songString.charAt(9));
             console.log(playlistName.html()); 
             console.log(userName.html());
-            console.log(songString);
-            console.log(songLibraryInit);
+            // console.log(songString);
+            // console.log(songLibraryInit);
             var bag= ""; 
             var i;
             for(i=0; i< songString.length; i++){
@@ -53,7 +53,7 @@ class webScraper extends React.Component {
                 bag+= " ";
               }
             }
-            console.log(songLibraryInit);
+            // console.log(songLibraryInit);
             for(i = 0;i<songLibraryInit.length;i++){
               if(songLibraryInit[i]!==""){
                 songLibraryFin.push(songLibraryInit[i]);
