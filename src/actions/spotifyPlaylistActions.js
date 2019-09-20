@@ -27,3 +27,15 @@ export const createNewPlaylist = createAsyncAction(
         console.log(error);
       })
 );
+
+export const spotifySongSearch = createAsyncAction(
+  spotifyPlaylistActions.SONG_SEARCH,
+  (jwt, artist, song) =>
+    axios({
+      method: "get",
+      url: ` https://api.spotify.com/v1/search?q=artist:${artist}%20track:${song}&type=album,track&limit=1`,
+      headers: {
+        Authorization: "Bearer " + jwt
+      }
+    })
+);
