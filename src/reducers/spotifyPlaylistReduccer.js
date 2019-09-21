@@ -8,6 +8,10 @@ const intialState = {
 
 export default function spotifyPlaylistReducer(state = intialState, actions) {
   switch (actions.type) {
+    case spotifyPlaylistActions.HOLD_PLAYLIST:
+      return Object.assign({}, state, {
+        songHolder: actions.tempSongList
+      });
     case `${spotifyPlaylistActions.CREATE_PLAYLIST}_PENDING`:
       return Object.assign({}, state, {
         status: "PENDING",
@@ -30,10 +34,14 @@ export default function spotifyPlaylistReducer(state = intialState, actions) {
         isRequestComplete: false
       });
     case `${spotifyPlaylistActions.SONG_SEARCH}_FULFILLED`:
-      const newTrackList = intialState.trackListUri;
+      let oldList = intialState.trackListUri;
+      let songItem = actions.payload.data.tracks.items;
+      console.log(songItem[0].uri);
+      oldList.push(songItem[0].uri);
       return Object.assign({}, state, {
         status: "FULFILLED",
-        isRequestComplete: true
+        isRequestComplete: true,
+        trackListUri: oldList
       });
     case `${spotifyPlaylistActions.SONG_SEARCH}_REJECTED`:
       return Object.assign({}, state, {

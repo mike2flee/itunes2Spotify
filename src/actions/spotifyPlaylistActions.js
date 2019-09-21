@@ -5,7 +5,8 @@ import { createAsyncAction } from "redux-promise-middleware-actions";
 export const spotifyPlaylistActions = {
   CREATE_PLAYLIST: "CREATE_PLAYLIST",
   SONG_SEARCH: "SONG_SEARCH",
-  ADD_SONG: "ADD_SONG"
+  ADD_SONG: "ADD_SONG",
+  HOLD_PLAYLIST: "HOLD_PLAYLIST"
 };
 //Base URl needs to be modified
 export const createNewPlaylist = createAsyncAction(
@@ -38,4 +39,16 @@ export const spotifySongSearch = createAsyncAction(
         Authorization: "Bearer " + jwt
       }
     })
+      .then(function(response) {
+        console.log(response);
+        return response;
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
 );
+
+export const holdPlaylist = songList => ({
+  type: spotifyPlaylistActions.HOLD_PLAYLIST,
+  tempSongList: songList
+});
