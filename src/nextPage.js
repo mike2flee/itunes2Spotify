@@ -5,8 +5,8 @@ import { bindActionCreators } from "redux";
 import { getUserData, jwtActionFunction } from "./actions/spotifyUserActions";
 import {
   createNewPlaylist,
-  holdPlaylist,
-  spotifySongSearch
+  spotifySongSearch,
+  completePLaylist
 } from "./actions/spotifyPlaylistActions";
 //Varaibles
 const request = require("request");
@@ -33,6 +33,7 @@ class nextPage extends React.Component {
     this.createPlaylist = this.createPlaylist.bind(this);
     this.iTunesDom = this.iTunesDom.bind(this);
     this.message = this.message.bind(this);
+    this.completePlayListCreation = this.completePlayListCreation.bind(this);
   }
 
   componentDidMount() {
@@ -115,7 +116,7 @@ class nextPage extends React.Component {
     this.props.actions.createNewPlaylist(
       this.props.jwt,
       this.props.userId,
-      "Sample2"
+      "Almost Done"
     );
   }
 
@@ -130,6 +131,16 @@ class nextPage extends React.Component {
       console.log(songs);
     }
   };
+
+  completePlayListCreation() {
+    console.log("Adding Songs to playlist");
+    // token, playlistid, songs
+    this.props.actions.completePLaylist(
+      this.props.jwt,
+      this.props.playListId,
+      this.props.trackUri
+    );
+  }
   render() {
     return (
       <div>
@@ -137,12 +148,16 @@ class nextPage extends React.Component {
         <h1>{this.props.count}</h1>
         <button onClick={this.iTunesDom}>Itunes</button>
         <button onClick={this.goToHome}>Back</button>
+        <button onClick={this.createPlaylist}>Create New PlayList</button>
         <button
           onClick={() => {
             this.message(this.state.listOfSongs);
           }}
         >
           Song Search{" "}
+        </button>
+        <button onClick={this.completePlayListCreation}>
+          completePLaylist
         </button>
       </div>
     );
@@ -156,8 +171,8 @@ function mapDispatchToProps(dispatch) {
         getUserData,
         ...jwtActionFunction,
         createNewPlaylist,
-        ...holdPlaylist,
-        spotifySongSearch
+        spotifySongSearch,
+        completePLaylist
       },
       dispatch
     )
@@ -168,7 +183,9 @@ function mapStateToProps(state) {
   return {
     count: state.counter.count,
     jwt: state.spotifyUser.jwt,
-    userId: state.spotifyUser.userID
+    userId: state.spotifyUser.userID,
+    playListId: state.spotifyPlaylist.playLIstID,
+    trackUri: state.spotifyPlaylist.trackListUri
   };
 }
 
