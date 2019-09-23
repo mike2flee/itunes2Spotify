@@ -1,0 +1,6 @@
+create a store for the list that is extracted form itunes link
+Take the song and aritst objects and add them to a reducer 
+tests the song search to get all the uri
+as the ur are being grabbed I will be adding them to them a list in the nextpage store and once I havae iterated over the list
+I will distpatch the list to a reducer to then make a called to create a playlist with the proper playlist name 
+then create complete the action to call create the plalist 

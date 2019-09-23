@@ -16,9 +16,9 @@ let song = function(songName, artist) {
   this.artist = artist;
 };
 let playlistName = "";
-var songLibrary = [];
-var songLibraryInit = [];
-var songLibraryFin = [];
+let songLibrary = [];
+let songLibraryInit = [];
+let songLibraryFin = [];
 
 class nextPage extends React.Component {
   constructor(props) {
@@ -26,7 +26,8 @@ class nextPage extends React.Component {
     this.state = {
       htmlBody: "Enter Dev mode to view loaded cherrio object",
       link: "https://music.apple.com/us/playlist/nonametwo/pl.u-PDb446ZsGMKXBo",
-      listOfSongs: songLibrary
+      listOfSongs: songLibrary,
+      playListTitle: playlistName
     };
     this.goToHome = this.goToHome.bind(this);
     this.urlGrab = this.urlGrab.bind(this);
@@ -39,7 +40,6 @@ class nextPage extends React.Component {
   componentDidMount() {
     this.urlGrab();
     this.iTunesDom();
-    // this.songQuery(this.state.listOfSongs);
   }
 
   goToHome() {
@@ -53,13 +53,16 @@ class nextPage extends React.Component {
           normalizeWhitespace: true,
           xmlMode: true
         });
-        playlistName = $(".product-header__title");
+        var title = $(".product-header__title");
         const userName = $(".product-header__identity");
         const tracks = $(".tracklist-item__text");
         var songString = tracks.text();
         // console.log("the character at x is: " + songString.charAt(9));
-        console.log(playlistName.html());
-        console.log(userName.html());
+        const title2 = title.html();
+        playlistName = title2.toString();
+        console.log("this is the title");
+        console.log(playlistName);
+        // console.log(userName.html());
         // console.log(songString);
         // console.log(songLibraryInit);
         var bag = "";
@@ -88,6 +91,8 @@ class nextPage extends React.Component {
         firstSong.songName = songLibraryFin[0];
         firstSong.artist = songLibraryFin[1];
         songLibrary.push(firstSong);
+        playlistName = "heeess";
+        console.log(playlistName);
         for (i = 2; i < songLibraryFin.length; i++) {
           if (i % 2 === 0) {
             var music = new song(songLibraryFin[i], songLibraryFin[i + 1]);
@@ -116,7 +121,7 @@ class nextPage extends React.Component {
     this.props.actions.createNewPlaylist(
       this.props.jwt,
       this.props.userId,
-      "Almost Done"
+      this.state.playListTitle
     );
   }
 
