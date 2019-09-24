@@ -10,7 +10,7 @@ import configureStore from "./configureStore";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ThankYou from "./ThankYou";
-
+//
 const store = configureStore();
 
 const history = syncHistoryWithStore(browserHistory, store);

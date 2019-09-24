@@ -5,9 +5,9 @@ import { bindActionCreators } from "redux";
 import { getUserData, jwtActionFunction } from "./actions/spotifyUserActions";
 import {
   createNewPlaylist,
-  spotifySongSearch,
-  completePLaylist
+  spotifySongSearch
 } from "./actions/spotifyPlaylistActions";
+import { Button, Input } from "reactstrap";
 //Varaibles
 const request = require("request");
 const cheerio = require("cheerio");
@@ -28,21 +28,21 @@ class nextPage extends React.Component {
       htmlBody: "Enter Dev mode to view loaded cherrio object",
       link: "https://music.apple.com/us/playlist/nonametwo/pl.u-PDb446ZsGMKXBo",
       listOfSongs: songLibrary,
-      playListTitle: name
+      playListTitle: name,
+      linkUrl: ""
     };
     this.goToHome = this.goToHome.bind(this);
     this.urlGrab = this.urlGrab.bind(this);
     this.createPlaylist = this.createPlaylist.bind(this);
     this.iTunesDom = this.iTunesDom.bind(this);
     this.message = this.message.bind(this);
-    this.completePlayListCreation = this.completePlayListCreation.bind(this);
     this.callThis = this.callThis.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
     console.log("will");
     this.urlGrab();
-    this.iTunesDom();
   }
 
   goToHome() {
@@ -50,7 +50,7 @@ class nextPage extends React.Component {
   }
 
   iTunesDom() {
-    request(this.state.link, function(error, response, html) {
+    request(this.state.linkUrl, function(error, response, html) {
       if (!error && response.statusCode === 200) {
         const $ = cheerio.load(html, {
           normalizeWhitespace: true,
@@ -119,14 +119,12 @@ class nextPage extends React.Component {
   }
 
   createPlaylist() {
-    //jwt, userId, playlistName)
-    console.log("Createing Playlist");
-    console.log(this.props.jwt);
     this.props.actions.createNewPlaylist(
       this.props.jwt,
       this.props.userId,
       this.state.playListTitle[0]
     );
+
     this.message(this.state.listOfSongs);
     browserHistory.push("/finished");
   }
@@ -147,33 +145,20 @@ class nextPage extends React.Component {
     }
   };
 
-  completePlayListCreation() {
-    console.log("Adding Songs to playlist");
-    // token, playlistid, songs
-    this.props.actions.completePLaylist(
-      this.props.jwt,
-      this.props.playListId,
-      this.props.trackUri
-    );
+  handleChange(event) {
+    this.setState({ linkUrl: event.target.value });
   }
+
   render() {
     return (
       <div>
-        <h1>Hello</h1>
-        <h1>{this.props.count}</h1>
-        <button onClick={this.iTunesDom}>Itunes</button>
-        <button onClick={this.goToHome}>Back</button>
-        <button onClick={this.createPlaylist}>Create New PlayList</button>
-        <button
-          onClick={() => {
-            this.message(this.state.listOfSongs);
-          }}
-        >
-          Song Search{" "}
-        </button>
-        <button onClick={this.completePlayListCreation}>
-          completePLaylist
-        </button>
+        <Input
+          type="text"
+          value={this.state.linkUrl}
+          onChange={this.handleChange}
+        />
+        <Button onClick={this.iTunesDom}>Song Pull</Button>
+        <Button onClick={this.createPlaylist}>Create New PlayList</Button>
       </div>
     );
   }
@@ -186,8 +171,7 @@ function mapDispatchToProps(dispatch) {
         getUserData,
         ...jwtActionFunction,
         createNewPlaylist,
-        spotifySongSearch,
-        completePLaylist
+        spotifySongSearch
       },
       dispatch
     )
