@@ -38,8 +38,12 @@ class App extends React.Component {
         <Button color="primary" size="lg" onClick={this.spotifyLogin}>
           Spotify Login
         </Button>
-        <Button color="warning" size="lg" onClick={this.goToHome}>next</Button>
-        <Button color="danger" size="lg" onClick={this.goToCheers}>Cheerio</Button>
+        <Button color="warning" size="lg" onClick={this.goToHome}>
+          next
+        </Button>
+        <Button color="danger" size="lg" onClick={this.goToCheers}>
+          Cheerio
+        </Button>
       </div>
     );
   }

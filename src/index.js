@@ -9,6 +9,7 @@ import App from "./App";
 import configureStore from "./configureStore";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ThankYou from "./ThankYou";
 
 const store = configureStore();
 
@@ -19,6 +20,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}></Route>
       <Route path="/playListCreation" component={nextPage}></Route>
+      <Route path="/finished" component={ThankYou}></Route>
       <Route path="/Cheers" component={webScraper}></Route>
     </Router>
   </Provider>,

@@ -19,6 +19,7 @@ let playlistName = "";
 let songLibrary = [];
 let songLibraryInit = [];
 let songLibraryFin = [];
+let name = [];
 
 class nextPage extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class nextPage extends React.Component {
       htmlBody: "Enter Dev mode to view loaded cherrio object",
       link: "https://music.apple.com/us/playlist/nonametwo/pl.u-PDb446ZsGMKXBo",
       listOfSongs: songLibrary,
-      playListTitle: playlistName
+      playListTitle: name
     };
     this.goToHome = this.goToHome.bind(this);
     this.urlGrab = this.urlGrab.bind(this);
@@ -35,9 +36,11 @@ class nextPage extends React.Component {
     this.iTunesDom = this.iTunesDom.bind(this);
     this.message = this.message.bind(this);
     this.completePlayListCreation = this.completePlayListCreation.bind(this);
+    this.callThis = this.callThis.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log("will");
     this.urlGrab();
     this.iTunesDom();
   }
@@ -62,6 +65,8 @@ class nextPage extends React.Component {
         playlistName = title2.toString();
         console.log("this is the title");
         console.log(playlistName);
+        name.push(playlistName);
+
         // console.log(userName.html());
         // console.log(songString);
         // console.log(songLibraryInit);
@@ -91,8 +96,6 @@ class nextPage extends React.Component {
         firstSong.songName = songLibraryFin[0];
         firstSong.artist = songLibraryFin[1];
         songLibrary.push(firstSong);
-        playlistName = "heeess";
-        console.log(playlistName);
         for (i = 2; i < songLibraryFin.length; i++) {
           if (i % 2 === 0) {
             var music = new song(songLibraryFin[i], songLibraryFin[i + 1]);
@@ -102,6 +105,7 @@ class nextPage extends React.Component {
         }
       }
     });
+    this.callThis();
   }
 
   urlGrab() {
@@ -121,8 +125,14 @@ class nextPage extends React.Component {
     this.props.actions.createNewPlaylist(
       this.props.jwt,
       this.props.userId,
-      this.state.playListTitle
+      this.state.playListTitle[0]
     );
+    this.message(this.state.listOfSongs);
+    browserHistory.push("/finished");
+  }
+
+  callThis() {
+    console.log("Called THis");
   }
 
   message = list => {
