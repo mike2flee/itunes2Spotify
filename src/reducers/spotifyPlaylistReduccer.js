@@ -36,8 +36,6 @@ export default function spotifyPlaylistReducer(state = intialState, actions) {
     case `${spotifyPlaylistActions.SONG_SEARCH}_FULFILLED`:
       let oldList = intialState.trackListUri;
       let songItem = actions.payload.data.tracks.items;
-      console.log(songItem[0].uri);
-      oldList.push(songItem[0].uri);
       return Object.assign({}, state, {
         status: "FULFILLED",
         isRequestComplete: true,

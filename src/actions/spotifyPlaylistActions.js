@@ -22,7 +22,6 @@ export const createNewPlaylist = createAsyncAction(
       headers: { Authorization: "Bearer " + jwt }
     })
       .then(function(response) {
-        console.log(response);
         return response;
       })
       .catch(function(error) {
