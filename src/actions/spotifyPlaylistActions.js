@@ -49,7 +49,7 @@ export const spotifySongSearch = createAsyncAction(
 );
 
 export const completePLaylist = createAsyncAction(
-  spotifyPlaylistActions.CREATE_PLAYLIST,
+  spotifyPlaylistActions.COMPLETE_PLAYLIST,
   (jwt, playListId, songs) =>
     axios({
       method: "post",

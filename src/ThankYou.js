@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getUserData, jwtActionFunction } from "./actions/spotifyUserActions";
 import {
-  createNewPlaylist,
   spotifySongSearch,
   completePLaylist
 } from "./actions/spotifyPlaylistActions";
@@ -42,7 +41,6 @@ function mapDispatchToProps(dispatch) {
       {
         getUserData,
         ...jwtActionFunction,
-        createNewPlaylist,
         spotifySongSearch,
         completePLaylist
       },
