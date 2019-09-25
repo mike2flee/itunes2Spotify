@@ -5,14 +5,14 @@ const uriConstants = {
   //  "http://itunes2spotify-20190826194208-hostingbucket-dev.s3-website-us-east-1.amazonaws.com/",
   //REDIRECTURL: "http://localhost:3000/playListCreation",
   //REDIRECTURL: "https://murmuring-plains-67099.herokuapp.com/playListCreation",
-  REDIRECTURL: "https://itunes-2-spotify.herokuapp.com/playListCreation",
+  // REDIRECTURL: "https://itunes-2-spotify.herokuapp.com/playListCreation",
+  REDIRECTURL: "https://symp-dcc1f.firebaseapp.com/playListCreation",
 
   FULL_PLAYLIST_AND_TRACK_MOD:
     "playlist-modify-public%20playlist-modify-private%20user-library-modify",
   USER_DATA_URL: "https://api.spotify.com/v1/me",
   BASE_URL: "https://api.spotify.com",
-  SONG_SERVICE:
-    "http://symp-env.8d3m89vfju.us-east-2.elasticbeanstalk.com/itunes/scrape"
+  SONG_SERVICE: "https://symp2.herokuapp.com/itunes/scrape"
 };
 
 export default uriConstants;
