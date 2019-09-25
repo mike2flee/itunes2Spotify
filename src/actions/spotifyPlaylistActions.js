@@ -1,13 +1,16 @@
 import axios from "axios";
-//import uriConstants from "../common/constants";
+import uriConstants from "../common/constants";
+import fetch from "isomorphic-fetch";
 import { createAsyncAction } from "redux-promise-middleware-actions";
+const cheerio = require("cheerio");
 
 export const spotifyPlaylistActions = {
   CREATE_PLAYLIST: "CREATE_PLAYLIST",
   SONG_SEARCH: "SONG_SEARCH",
   ADD_SONG: "ADD_SONG",
   HOLD_PLAYLIST: "HOLD_PLAYLIST",
-  COMPLETE_PLAYLIST: "COMPLETE_PLAYLIST"
+  COMPLETE_PLAYLIST: "COMPLETE_PLAYLIST",
+  PULL_SONGS: "PULL_SONGS"
 };
 //Base URl needs to be modified
 export const createNewPlaylist = createAsyncAction(
@@ -58,6 +61,25 @@ export const completePLaylist = createAsyncAction(
         uris: songs
       },
       headers: { Authorization: "Bearer " + jwt }
+    })
+      .then(function(response) {
+        console.log(response);
+        return response;
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+);
+
+export const pullSongs = createAsyncAction(
+  spotifyPlaylistActions.PULL_SONGS,
+  playListLink =>
+    axios({
+      method: "post",
+      url: uriConstants.SONG_SERVICE,
+      data: {
+        itunesUrl: playListLink
+      }
     })
       .then(function(response) {
         console.log(response);
