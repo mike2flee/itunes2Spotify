@@ -44,7 +44,6 @@ export default function spotifyPlaylistReducer(state = intialState, actions) {
         oldList.push(songItem[0].uri);
       } catch (error) {
         console.log(error);
-        console.log(actions.payload.data.tracks);
       }
       return Object.assign({}, state, {
         status: "FULFILLED",
