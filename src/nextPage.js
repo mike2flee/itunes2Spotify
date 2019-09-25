@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -10,27 +9,13 @@ import {
   pullSongs
 } from "./actions/spotifyPlaylistActions";
 import { Button, Input } from "reactstrap";
-//Varaibles
+//Varaibl
 const request = require("request");
-
-let song = function(songName, artist) {
-  this.songName = songName;
-  this.artist = artist;
-};
-let playlistName = "";
-let songLibrary = [];
-let songLibraryInit = [];
-let songLibraryFin = [];
-let name = [];
 
 class nextPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      htmlBody: "Enter Dev mode to view loaded cherrio object",
-      link: "https://music.apple.com/us/playlist/nonametwo/pl.u-PDb446ZsGMKXBo",
-      listOfSongs: songLibrary,
-      playListTitle: name,
       linkUrl: ""
     };
     this.goToHome = this.goToHome.bind(this);
@@ -51,76 +36,8 @@ class nextPage extends React.Component {
     browserHistory.push("/");
   }
 
-  // axios({
-  //   method: "get",
-  //   url: this.state.linkUrl,
-  //   maxRedirects: 0
-  // })
-
   iTunesDom() {
     this.props.actions.pullSongs(this.state.linkUrl);
-    // axios({
-    //   method: "get",
-    //   url: this.state.linkUrl,
-    //   maxRedirects: 0
-    // }).then(
-    //   response => {
-    //     if (response.status === 200) {
-    //       const html = response.data;
-    //       const $ = cheerio.load(html, {
-    //         normalizeWhitespace: true,
-    //         xmlMode: true
-    //       });
-    //       var title = $(".product-header__title");
-    //       const userName = $(".product-header__identity");
-    //       const tracks = $(".tracklist-item__text");
-    //       var songString = tracks.text();
-    //       // console.log("the character at x is: " + songString.charAt(9));
-    //       const title2 = title.html();
-    //       playlistName = title2.toString();
-    //       console.log("this is the title");
-    //       console.log(playlistName);
-    //       name.push(playlistName);
-    //       // console.log(userName.html());
-    //       // console.log(songString);
-    //       // console.log(songLibraryInit);
-    //       var bag = "";
-    //       var i;
-    //       for (i = 0; i < songString.length; i++) {
-    //         if (songString.charAt(i) !== " ") {
-    //           bag += songString.charAt(i);
-    //         } else if (
-    //           songString.charAt(i) === " " &&
-    //           songString.charAt(i + 1) === " "
-    //         ) {
-    //           songLibraryInit.push(bag);
-    //           bag = "";
-    //         } else {
-    //           bag += " ";
-    //         }
-    //       }
-    //       // console.log(songLibraryInit);
-    //       for (i = 0; i < songLibraryInit.length; i++) {
-    //         if (songLibraryInit[i] !== "") {
-    //           songLibraryFin.push(songLibraryInit[i]);
-    //         }
-    //       }
-    //       // console.log(songLibraryFin);
-    //       var firstSong = new song("testSongName", "testArtist");
-    //       firstSong.songName = songLibraryFin[0];
-    //       firstSong.artist = songLibraryFin[1];
-    //       songLibrary.push(firstSong);
-    //       for (i = 2; i < songLibraryFin.length; i++) {
-    //         if (i % 2 === 0) {
-    //           var music = new song(songLibraryFin[i], songLibraryFin[i + 1]);
-    //           // console.log("i is equal to : " + i);
-    //           songLibrary.push(music);
-    //         }
-    //       }
-    //     }
-    //   },
-    //   error => console.log(error)
-    // );
   }
 
   urlGrab() {
@@ -137,11 +54,10 @@ class nextPage extends React.Component {
     this.props.actions.createNewPlaylist(
       this.props.jwt,
       this.props.userId,
-      this.state.playListTitle[0]
+      this.props.playListName
     );
 
-    this.message(this.state.listOfSongs);
-    browserHistory.push("/finished");
+    this.message(this.props.listOfSongs);
   }
 
   callThis() {
@@ -158,6 +74,7 @@ class nextPage extends React.Component {
       );
       console.log(songs);
     }
+    browserHistory.push("/finished");
   };
 
   handleChange(event) {
@@ -200,7 +117,9 @@ function mapStateToProps(state) {
     jwt: state.spotifyUser.jwt,
     userId: state.spotifyUser.userID,
     playListId: state.spotifyPlaylist.playLIstID,
-    trackUri: state.spotifyPlaylist.trackListUri
+    trackUri: state.spotifyPlaylist.trackListUri,
+    playListName: state.spotifyPlaylist.playListTitle,
+    listOfSongs: state.spotifyPlaylist.songList
   };
 }
 

@@ -6,9 +6,9 @@ const intialState = {
   playLIstID: "",
   isRequestComplete: false,
   trackListUri: [],
-  pullin: "",
   playListTitle: "",
-  songList: []
+  songList: [],
+  pullin: ""
 };
 
 export default function spotifyPlaylistReducer(state = intialState, actions) {
@@ -44,6 +44,7 @@ export default function spotifyPlaylistReducer(state = intialState, actions) {
         oldList.push(songItem[0].uri);
       } catch (error) {
         console.log(error);
+        console.log(actions.payload.data.tracks);
       }
       return Object.assign({}, state, {
         status: "FULFILLED",
@@ -140,7 +141,7 @@ export default function spotifyPlaylistReducer(state = intialState, actions) {
         isRequestComplete: true,
         pullin: actions.payload.data.httpResponse,
         songList: songLibrary,
-        playlistName: name[0]
+        playListTitle: name[0]
       });
     case `${spotifyPlaylistActions.PULL_SONGS}_REJECTED`:
       return Object.assign({}, state, {
