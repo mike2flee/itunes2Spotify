@@ -3,9 +3,9 @@ const uriConstants = {
   CLIENT_SECRET: "ab192b2513fc4557b82f7e681bc1fda0",
   // REDIRECTURL:
   //  "http://itunes2spotify-20190826194208-hostingbucket-dev.s3-website-us-east-1.amazonaws.com/",
-  //REDIRECTURL: "http://localhost:3000/playListCreation",
+  REDIRECTURL: "http://localhost:3000/playListCreation",
   //REDIRECTURL: "https://murmuring-plains-67099.herokuapp.com/playListCreation",
-  REDIRECTURL: "https://itunes-2-spotify.herokuapp.com/playListCreation",
+  //REDIRECTURL: "https://itunes-2-spotify.herokuapp.com/playListCreation",
   //REDIRECTURL: "https://symp-dcc1f.firebaseapp.com/playListCreation",
 
   FULL_PLAYLIST_AND_TRACK_MOD:

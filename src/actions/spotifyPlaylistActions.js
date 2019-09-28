@@ -1,8 +1,6 @@
 import axios from "axios";
 import uriConstants from "../common/constants";
-import fetch from "isomorphic-fetch";
 import { createAsyncAction } from "redux-promise-middleware-actions";
-const cheerio = require("cheerio");
 
 export const spotifyPlaylistActions = {
   CREATE_PLAYLIST: "CREATE_PLAYLIST",

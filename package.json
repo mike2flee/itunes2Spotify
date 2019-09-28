@@ -15,12 +15,15 @@
     "react-router": "^3.2.4",
     "react-router-redux": "^4.0.8",
     "react-scripts": "3.1.1",
+    "react-spinners": "^0.6.1",
+    "react-strap": "0.0.1",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.1",
     "redux-promise-middleware-actions": "^3.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.22.12"
   },
   "scripts": {
     "start": "react-scripts start",

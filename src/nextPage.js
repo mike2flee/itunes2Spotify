@@ -1,22 +1,24 @@
 import React from "react";
 import { browserHistory } from "react-router";
 import { connect } from "react-redux";
+import { Button } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { getUserData, jwtActionFunction } from "./actions/spotifyUserActions";
+import { Row, Col, Container } from "reactstrap";
+import { RotateLoader } from "react-spinners";
 import {
   createNewPlaylist,
   spotifySongSearch,
   pullSongs
 } from "./actions/spotifyPlaylistActions";
-import { Button, Input } from "reactstrap";
-//Varaibl
-const request = require("request");
+import Navigation from "./Navigation";
 
 class nextPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      linkUrl: ""
+      linkUrl: "",
+      loading: this.props.loading
     };
     this.goToHome = this.goToHome.bind(this);
     this.urlGrab = this.urlGrab.bind(this);
@@ -28,7 +30,6 @@ class nextPage extends React.Component {
   }
 
   componentWillMount() {
-    console.log("will");
     this.urlGrab();
   }
 
@@ -83,15 +84,69 @@ class nextPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <Input
-          type="text"
-          value={this.state.linkUrl}
-          onChange={this.handleChange}
-        />
-        <Button onClick={this.iTunesDom}>Song Pull</Button>
-        <Button onClick={this.createPlaylist}>Create New PlayList</Button>
-      </div>
+      <Container fluid="True" className="root">
+        <Navigation></Navigation>
+        <Row className="endBoxes"></Row>
+        <Row className="landingPageRow">
+          <Col sm={{ size: 8, offset: 2 }}>
+            <h1>Welcome {this.props.userName}</h1>
+            <Row className="mainSearch">
+              {" "}
+              {/* //Start of Content */}
+              <Col className="centerStuff" sm={{ size: 8, offset: 2 }}>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  aria-label="Example text with button addon"
+                  aria-describedby="button-addon1"
+                  value={this.state.linkUrl}
+                  onChange={this.handleChange}
+                ></input>
+
+                <Row>
+                  {this.props.songPull === false ? (
+                    <Button
+                      className="centerStuff boxShadow text buttonMargin"
+                      color="primary"
+                      size="lg"
+                      onClick={this.iTunesDom}
+                    >
+                      Pull Playlist
+                    </Button>
+                  ) : (
+                    <Button
+                      className="centerStuff boxShadow text buttonMargin"
+                      color="primary"
+                      size="lg"
+                      onClick={this.createPlaylist}
+                    >
+                      Create Playlist
+                    </Button>
+                  )}
+
+                  <RotateLoader
+                    sizeUnit={"px"}
+                    size={150}
+                    color={"#123abc"}
+                    loading={this.state.loading}
+                  />
+                </Row>
+              </Col>
+              {/* //End of Content */}
+            </Row>
+          </Col>
+        </Row>
+        <Row className="endBoxes"></Row>
+      </Container>
+      // <div>
+      //   <Input
+      //     type="text"
+
+      //   />
+      //   <Button onClick={this.iTunesDom}>Song Pull</Button>
+      //   <Button onClick={this.createPlaylist}>Create New PlayList</Button>
+      // </div>
     );
   }
 }
@@ -119,7 +174,10 @@ function mapStateToProps(state) {
     playListId: state.spotifyPlaylist.playLIstID,
     trackUri: state.spotifyPlaylist.trackListUri,
     playListName: state.spotifyPlaylist.playListTitle,
-    listOfSongs: state.spotifyPlaylist.songList
+    listOfSongs: state.spotifyPlaylist.songList,
+    songPull: state.spotifyPlaylist.songPullStatus,
+    loading: state.spotifyPlaylist.loading,
+    userName: state.spotifyUser.userName
   };
 }
 

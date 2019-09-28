@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "reactstrap";
+import { Col } from "reactstrap";
 import { browserHistory } from "react-router";
 import uriConstants from "./common/constants";
 
@@ -33,18 +34,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>iTunes -> Spotify</h1>
-        <Button color="primary" size="lg" onClick={this.spotifyLogin}>
+      <Col className="centerStuff" sm={{ size: 8, offset: 2 }}>
+        <div className="logo"></div>
+        <Button
+          className="centerStuff boxShadow text"
+          color="primary"
+          size="lg"
+          onClick={this.spotifyLogin}
+        >
           Spotify Login
         </Button>
-        <Button color="warning" size="lg" onClick={this.goToHome}>
-          next
-        </Button>
-        <Button color="danger" size="lg" onClick={this.goToCheers}>
-          Cheerio
-        </Button>
-      </div>
+      </Col>
     );
   }
 }

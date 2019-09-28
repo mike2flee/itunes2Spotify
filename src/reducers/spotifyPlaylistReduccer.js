@@ -8,7 +8,9 @@ const intialState = {
   trackListUri: [],
   playListTitle: "",
   songList: [],
-  pullin: ""
+  pullin: "",
+  songPullStatus: false,
+  loading: false
 };
 
 export default function spotifyPlaylistReducer(state = intialState, actions) {
@@ -76,7 +78,8 @@ export default function spotifyPlaylistReducer(state = intialState, actions) {
     case `${spotifyPlaylistActions.PULL_SONGS}_PENDING`:
       return Object.assign({}, state, {
         status: "PENDING",
-        isRequestComplete: false
+        isRequestComplete: false,
+        loading: true
       });
     case `${spotifyPlaylistActions.PULL_SONGS}_FULFILLED`:
       let playlistName = "";
@@ -138,14 +141,17 @@ export default function spotifyPlaylistReducer(state = intialState, actions) {
       return Object.assign({}, state, {
         status: "FULFILLED",
         isRequestComplete: true,
+        songPullStatus: true,
         pullin: actions.payload.data.httpResponse,
         songList: songLibrary,
-        playListTitle: name[0]
+        playListTitle: name[0],
+        loading: false
       });
     case `${spotifyPlaylistActions.PULL_SONGS}_REJECTED`:
       return Object.assign({}, state, {
         status: "REJECTED",
-        isRequestComplete: false
+        isRequestComplete: false,
+        loading: false
       });
     default:
       return state;

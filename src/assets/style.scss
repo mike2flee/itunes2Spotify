@@ -1,0 +1,76 @@
+$color: #a65959;
+$green: #c6eccf;
+$offWhite: #fafafa;
+
+.root {
+  background-color: $offWhite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.box {
+  background-color: $green;
+  width: auto;
+  align-self: center;
+  align-content: center;
+}
+.logoCol {
+  background-color: $offWhite;
+  height: 60%;
+}
+.logo {
+  height: 100%;
+  background-image: url("./transparentLogo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.mainSearch {
+  height: 40%;
+}
+
+.landingPageRow {
+  //   height: calc(100% / 3);
+  height: 60%;
+}
+.endBoxes {
+  height: 20%;
+}
+.holder {
+  background-color: #a65959;
+  height: 100%;
+}
+.centerStuff {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: "Rubik";
+}
+.boxShadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.text {
+  text-align: center;
+  font-family: "Rubik";
+  color: $offWhite;
+}
+
+.buttonMargin {
+  margin-top: 8px;
+}
+
+.loader {
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Rubik";
+}
