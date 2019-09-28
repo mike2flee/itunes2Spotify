@@ -34,7 +34,9 @@ class Navigation extends React.Component {
       <Container fluid>
         <div>
           <Navbar color="dark fixed-top" dark>
-            <div className="text">SYMP</div>
+            <a className="text" href="https://itunes-2-spotify.herokuapp.com/">
+              SYMP
+            </a>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse isOpen={!this.state.collapsed} navbar>
               <Nav navbar>

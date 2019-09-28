@@ -31,6 +31,15 @@
   margin-bottom: 5%;
 }
 
+.goodChoice {
+  height: 100%;
+  background-image: url("./gotit.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-bottom: 5%;
+}
+
 .mainSearch {
   height: 40%;
 }

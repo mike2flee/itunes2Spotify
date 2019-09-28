@@ -6,12 +6,14 @@ import {
   spotifySongSearch,
   completePLaylist
 } from "./actions/spotifyPlaylistActions";
+import { Button, Container, Row, Col } from "reactstrap";
 
 class ThankYou extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      htmlBody: "Enter Dev mode to view loaded cherrio object"
+      htmlBody: "Enter Dev mode to view loaded cherrio object",
+      pressed: false
     };
     this.completePlayListCreation = this.completePlayListCreation.bind(this);
   }
@@ -23,13 +25,33 @@ class ThankYou extends React.Component {
       this.props.playListId,
       this.props.trackUri
     );
+    this.setState({
+      pressed: true
+    });
   }
   render() {
     return (
-      <div>
-        <h1>THank you </h1>
-        <button onClick={this.completePlayListCreation}>Final</button>
-      </div>
+      <Container fluid="True" className="root">
+        <Row className="landingPageRow">
+          <Col className=" centerStuff">
+            <Row>
+              <Col className="centerStuff" sm={{ size: 8, offset: 2 }}>
+                <h5>Finalize the Creation of {this.props.playListName}</h5>
+                <div className="goodChoice"></div>
+                <Button
+                  color="primary"
+                  onClick={this.completePlayListCreation}
+                  disabled={this.state.pressed}
+                  className="centerStuff  boxShadow text buttonMargin"
+                  size="lg"
+                >
+                  Finalize
+                </Button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
@@ -54,7 +76,8 @@ function mapStateToProps(state) {
     jwt: state.spotifyUser.jwt,
     userId: state.spotifyUser.userID,
     playListId: state.spotifyPlaylist.playLIstID,
-    trackUri: state.spotifyPlaylist.trackListUri
+    trackUri: state.spotifyPlaylist.trackListUri,
+    playListName: state.spotifyPlaylist.playListTitle
   };
 }
 

@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { Button } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { getUserData, jwtActionFunction } from "./actions/spotifyUserActions";
-import { Row, Col, Container } from "reactstrap";
-import { RotateLoader } from "react-spinners";
+import { Row, Col, Container, Modal, ModalBody } from "reactstrap";
+import { HashLoader } from "react-spinners";
 import {
   createNewPlaylist,
   spotifySongSearch,
@@ -18,7 +18,6 @@ class nextPage extends React.Component {
     super(props);
     this.state = {
       linkUrl: "",
-      loading: this.props.loading,
       disabledButton: true
     };
     this.goToHome = this.goToHome.bind(this);
@@ -105,7 +104,9 @@ class nextPage extends React.Component {
         <Row className="endBoxes"></Row>
         <Row className="landingPageRow">
           <Col sm={{ size: 8, offset: 2 }}>
-            <h1>Welcome {this.props.userName}</h1>
+            <h1>Welcome</h1>
+            <h1>{this.props.userName}</h1>
+
             <Row className="mainSearch">
               {" "}
               {/* //Start of Content */}
@@ -142,12 +143,22 @@ class nextPage extends React.Component {
                     </Button>
                   )}
 
-                  <RotateLoader
-                    sizeUnit={"px"}
-                    size={150}
-                    color={"#123abc"}
-                    loading={this.state.loading}
-                  />
+                  <Modal
+                    isOpen={this.props.loading}
+                    toggle={this.toggle}
+                    className={this.props.className}
+                    centered
+                  >
+                    <ModalBody className="centerStuff">
+                      <HashLoader
+                        sizeUnit={"px"}
+                        size={150}
+                        color={"#83b0f7"}
+                        loading={true}
+                        className="centerStuff"
+                      />
+                    </ModalBody>
+                  </Modal>
                 </Row>
               </Col>
               {/* //End of Content */}
