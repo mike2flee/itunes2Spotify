@@ -18,7 +18,8 @@ class nextPage extends React.Component {
     super(props);
     this.state = {
       linkUrl: "",
-      loading: this.props.loading
+      loading: this.props.loading,
+      disabledButton: true
     };
     this.goToHome = this.goToHome.bind(this);
     this.urlGrab = this.urlGrab.bind(this);
@@ -44,11 +45,16 @@ class nextPage extends React.Component {
   urlGrab() {
     const hash = window.location.hash;
     const hashArray = hash.split("=");
-    const hashArray2 = hashArray[1].split("&");
-    const jwt = hashArray2[0];
-    this.props.actions.getJWT(jwt);
-    this.props.actions.getUserData(jwt);
-    browserHistory.push("/playListCreation");
+    console.log(hashArray);
+    if (!(hashArray[0] === "#access_token")) {
+      browserHistory.push("/");
+    } else {
+      const hashArray2 = hashArray[1].split("&");
+      const jwt = hashArray2[0];
+      this.props.actions.getJWT(jwt);
+      this.props.actions.getUserData(jwt);
+      browserHistory.push("/playListCreation");
+    }
   }
 
   createPlaylist() {
@@ -80,6 +86,16 @@ class nextPage extends React.Component {
 
   handleChange(event) {
     this.setState({ linkUrl: event.target.value });
+    if (event.target.value) {
+      console.log("enables");
+      this.setState({
+        disabledButton: false
+      });
+    } else {
+      this.setState({
+        disabledButton: true
+      });
+    }
   }
 
   render() {
@@ -111,6 +127,7 @@ class nextPage extends React.Component {
                       color="primary"
                       size="lg"
                       onClick={this.iTunesDom}
+                      disabled={this.state.disabledButton}
                     >
                       Pull Playlist
                     </Button>
